@@ -137,72 +137,84 @@ OnAutoItExitRegister('__LogaFreeOnExit') ;register free function
 
 #Region Public Functions
 
-Func _IfLoga($iLevel, $iLogaInstance = 1)
+Func _IfLoga($iLevel, $iLogaInstance = 1, Const $iCurrentError = @error, Const $iCurrentExtended = @extended)
 	Local $iInstanceLevel = __LogaGetInstanceLevel($iLogaInstance)
-	If $iInstanceLevel = -1 Then Return False
-	Return BitAND($iLevel, $iInstanceLevel) = $iLevel
+	If $iInstanceLevel = -1 Then Return SetError($iCurrentError, $iCurrentExtended, False)
+	Return SetError($iCurrentError, $iCurrentExtended, (BitAND($iLevel, $iInstanceLevel) = $iLevel))
 EndFunc   ;==>_IfLoga
 
-Func _LogaT($sLogaMessage, $iLogaInstance = 1)
+Func _LogaT($sLogaMessage, $iLogaInstance = 1, Const $iCurrentError = @error, Const $iCurrentExtended = @extended)
 	__LogaWriteMessage($sLogaMessage, $LOGA_TRACE, $iLogaInstance)
+	SetError($iCurrentError, $iCurrentExtended)
 EndFunc   ;==>_LogaT
 
-Func _LogaD($sLogaMessage, $iLogaInstance = 1)
+Func _LogaD($sLogaMessage, $iLogaInstance = 1, Const $iCurrentError = @error, Const $iCurrentExtended = @extended)
 	__LogaWriteMessage($sLogaMessage, $LOGA_DEBUG, $iLogaInstance)
+	SetError($iCurrentError, $iCurrentExtended)
 EndFunc   ;==>_LogaD
 
 
-Func _LogaI($sLogaMessage, $iLogaInstance = 1)
+Func _LogaI($sLogaMessage, $iLogaInstance = 1, Const $iCurrentError = @error, Const $iCurrentExtended = @extended)
 	__LogaWriteMessage($sLogaMessage, $LOGA_INFO, $iLogaInstance)
+	SetError($iCurrentError, $iCurrentExtended)
 EndFunc   ;==>_LogaI
 
-Func _LogaW($sLogaMessage, $iLogaInstance = 1)
+Func _LogaW($sLogaMessage, $iLogaInstance = 1, Const $iCurrentError = @error, Const $iCurrentExtended = @extended)
 	__LogaWriteMessage($sLogaMessage, $LOGA_WARN, $iLogaInstance)
+	SetError($iCurrentError, $iCurrentExtended)
 EndFunc   ;==>_LogaW
 
-Func _LogaE($sLogaMessage, $iLogaInstance = 1)
+Func _LogaE($sLogaMessage, $iLogaInstance = 1, Const $iCurrentError = @error, Const $iCurrentExtended = @extended)
 	__LogaWriteMessage($sLogaMessage, $LOGA_ERROR, $iLogaInstance)
+	SetError($iCurrentError, $iCurrentExtended)
 EndFunc   ;==>_LogaE
 
-Func _LogaF($sLogaMessage, $iLogaInstance = 1)
+Func _LogaF($sLogaMessage, $iLogaInstance = 1, Const $iCurrentError = @error, Const $iCurrentExtended = @extended)
 	__LogaWriteMessage($sLogaMessage, $LOGA_FATAL, $iLogaInstance)
+	SetError($iCurrentError, $iCurrentExtended)
 EndFunc   ;==>_LogaF
 
 
-Func _LogaTraceIf($iCondition, $sMessage, $iLogaInstance = 1)
+Func _LogaTraceIf($iCondition, $sMessage, $iLogaInstance = 1, Const $iCurrentError = @error, Const $iCurrentExtended = @extended)
 	If $iCondition Then
 		_LogaTrace($sMessage, $iLogaInstance)
 	EndIf
+	SetError($iCurrentError, $iCurrentExtended)
 EndFunc   ;==>_LogaTraceIf
 
-Func _LogaDebugIf($iCondition, $sMessage, $iLogaInstance = 1)
+Func _LogaDebugIf($iCondition, $sMessage, $iLogaInstance = 1, Const $iCurrentError = @error, Const $iCurrentExtended = @extended)
 	If $iCondition Then
 		_LogaDebug($sMessage, $iLogaInstance)
 	EndIf
+	SetError($iCurrentError, $iCurrentExtended)
 EndFunc   ;==>_LogaDebugIf
 
-Func _LogaInfoIf($iCondition, $sMessage, $iLogaInstance = 1)
+Func _LogaInfoIf($iCondition, $sMessage, $iLogaInstance = 1, Const $iCurrentError = @error, Const $iCurrentExtended = @extended)
 	If $iCondition Then
 		_LogaInfo($sMessage, $iLogaInstance)
 	EndIf
+	SetError($iCurrentError, $iCurrentExtended)
 EndFunc   ;==>_LogaInfoIf
 
-Func _LogaWarnIf($iCondition, $sMessage, $iLogaInstance = 1)
+Func _LogaWarnIf($iCondition, $sMessage, $iLogaInstance = 1, Const $iCurrentError = @error, Const $iCurrentExtended = @extended)
 	If $iCondition Then
 		_LogaWarn($sMessage, $iLogaInstance)
 	EndIf
+	SetError($iCurrentError, $iCurrentExtended)
 EndFunc   ;==>_LogaWarnIf
 
-Func _LogaErrorIf($iCondition, $sMessage, $iLogaInstance = 1)
+Func _LogaErrorIf($iCondition, $sMessage, $iLogaInstance = 1, Const $iCurrentError = @error, Const $iCurrentExtended = @extended)
 	If $iCondition Then
 		_LogaError($sMessage, $iLogaInstance)
 	EndIf
+	SetError($iCurrentError, $iCurrentExtended)
 EndFunc   ;==>_LogaErrorIf
 
-Func _LogaFatalIf($iCondition, $sMessage, $iLogaInstance = 1)
+Func _LogaFatalIf($iCondition, $sMessage, $iLogaInstance = 1, Const $iCurrentError = @error, Const $iCurrentExtended = @extended)
 	If $iCondition Then
 		_LogaFatal($sMessage, $iLogaInstance)
 	EndIf
+	SetError($iCurrentError, $iCurrentExtended)
 EndFunc   ;==>_LogaFatalIf
 
 Func __LogaGetInstanceLevel($iLogaInstance = 1)
@@ -216,28 +228,34 @@ Func __LogaGetInstanceLevel($iLogaInstance = 1)
 	Return ($__g_aaLogaInstances[$iInstance - 1])[$eLOGA_Level]
 EndFunc   ;==>__LogaGetInstanceLevel
 
-Func _LogaTrace($sLogaMessage, $iLogaInstance = 1)
+Func _LogaTrace($sLogaMessage, $iLogaInstance = 1, Const $iCurrentError = @error, Const $iCurrentExtended = @extended)
 	__LogaWriteMessage($sLogaMessage, $LOGA_TRACE, $iLogaInstance)
+	SetError($iCurrentError, $iCurrentExtended)
 EndFunc   ;==>_LogaTrace
 
-Func _LogaDebug($sLogaMessage, $iLogaInstance = 1)
+Func _LogaDebug($sLogaMessage, $iLogaInstance = 1, Const $iCurrentError = @error, Const $iCurrentExtended = @extended)
 	__LogaWriteMessage($sLogaMessage, $LOGA_DEBUG, $iLogaInstance)
+	SetError($iCurrentError, $iCurrentExtended)
 EndFunc   ;==>_LogaDebug
 
-Func _LogaInfo($sLogaMessage, $iLogaInstance = 1)
+Func _LogaInfo($sLogaMessage, $iLogaInstance = 1, Const $iCurrentError = @error, Const $iCurrentExtended = @extended)
 	__LogaWriteMessage($sLogaMessage, $LOGA_INFO, $iLogaInstance)
+	SetError($iCurrentError, $iCurrentExtended)
 EndFunc   ;==>_LogaInfo
 
-Func _LogaWarn($sLogaMessage, $iLogaInstance = 1)
+Func _LogaWarn($sLogaMessage, $iLogaInstance = 1, Const $iCurrentError = @error, Const $iCurrentExtended = @extended)
 	__LogaWriteMessage($sLogaMessage, $LOGA_WARN, $iLogaInstance)
+	SetError($iCurrentError, $iCurrentExtended)
 EndFunc   ;==>_LogaWarn
 
-Func _LogaError($sLogaMessage, $iLogaInstance = 1)
+Func _LogaError($sLogaMessage, $iLogaInstance = 1, Const $iCurrentError = @error, Const $iCurrentExtended = @extended)
 	__LogaWriteMessage($sLogaMessage, $LOGA_ERROR, $iLogaInstance)
+	SetError($iCurrentError, $iCurrentExtended)
 EndFunc   ;==>_LogaError
 
-Func _LogaFatal($sLogaMessage, $iLogaInstance = 1)
+Func _LogaFatal($sLogaMessage, $iLogaInstance = 1, Const $iCurrentError = @error, Const $iCurrentExtended = @extended)
 	__LogaWriteMessage($sLogaMessage, $LOGA_FATAL, $iLogaInstance)
+	SetError($iCurrentError, $iCurrentExtended)
 EndFunc   ;==>_LogaFatal
 
 Func _LogaShowGUIOnCompiled($bShow, $iLogaInstance = 1)
