@@ -9,10 +9,10 @@
 ;Custom Console is disabled by default.
 ;By default log to STDOUT.
 
-Local $hLoga=_LogaNew()
+Global $hLoga=_LogaNew()
 
-Local $iVariable1=1
-Local $iVariable2=1
+Global $iVariable1=1
+Global $iVariable2=1
 _LogaTraceIf($iVariable1=$iVariable2, "$iVariable1 and $iVariable2 are equals.")
 _LogaDebug("I'm Debug")
 _LogaInfo("I'm Info")

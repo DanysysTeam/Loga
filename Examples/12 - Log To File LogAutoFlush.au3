@@ -3,12 +3,12 @@
 
 
 ;LogFileAutoFlush Eeable vs  LogFileAutoFlush Disable
-Local $sInstancesComparison = ""
+Global $sInstancesComparison = ""
 
-Local $sSettings1 = 'FilePath="FileLoga1.log"'
-Local $hLoga1 = _LogaNew($sSettings1) ;create instance with custom settings
+Global $sSettings1 = 'FilePath="FileLoga1.log"'
+Global $hLoga1 = _LogaNew($sSettings1) ;create instance with custom settings
 
-Local $hTimer = TimerInit()
+Global $hTimer = TimerInit()
 For $i = 1 To 100
 	_LogaTrace("I'm Trace" & @TAB & $i)
 	_LogaDebug("I'm Debug" & @TAB & $i)
@@ -20,8 +20,8 @@ Next
 
 $sInstancesComparison = "Time Elapsed Instance 1: " & TimerDiff($hTimer) & @CRLF
 
-Local $sSettings2 = 'FilePath="FileLoga2.log" LogFileAutoFlush="false"'
-Local $hLoga2 = _LogaNew($sSettings2) ;create instance with custom settings
+Global $sSettings2 = 'FilePath="FileLoga2.log" LogFileAutoFlush="false"'
+Global $hLoga2 = _LogaNew($sSettings2) ;create instance with custom settings
 
 $hTimer = TimerInit()
 For $i = 1 To 100

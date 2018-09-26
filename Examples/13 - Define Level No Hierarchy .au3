@@ -2,12 +2,12 @@
 
 ;~ _LogaSetLevel($LOGA_INFO);Uncomment this line to override instances settings
 
-Local $hLoga1 = _LogaNew() ;create new intance with default settings
-Local $iCustomLevel1=BitOR($LOGA_TRACE,$LOGA_FATAL) ;this will log only Trace and Fatal
+Global $hLoga1 = _LogaNew() ;create new intance with default settings
+Global $iCustomLevel1=BitOR($LOGA_TRACE,$LOGA_FATAL) ;this will log only Trace and Fatal
 _LogaSetInstanceLevel($iCustomLevel1) ;set level default parameter is first instance
 
-Local $hLoga2 = _LogaNew() ;create new intance with default settings
-Local $iCustomLevel2=BitOR($LOGA_DEBUG,$LOGA_WARN) ;this will log only Debug and Warn
+Global $hLoga2 = _LogaNew() ;create new intance with default settings
+Global $iCustomLevel2=BitOR($LOGA_DEBUG,$LOGA_WARN) ;this will log only Debug and Warn
 _LogaSetInstanceLevel($iCustomLevel2, 2)  ;set level using Instance handle
 
 

@@ -3,12 +3,12 @@
 _LogaSetLevel($LOGA_LEVEL_FATAL) ;this will override all instances level
 ;~ _LogaSetLevel($LOGA_LEVEL_INSTANCE) ;override above setting to allow instance defined level
 
-Local $hLoga1 = _LogaNew() ;create new intance with default settings
+Global $hLoga1 = _LogaNew() ;create new intance with default settings
 _LogaSetInstanceLevel($LOGA_LEVEL_DEBUG) ;set level default parameter is first instance
 ;~  _LogaSetInstanceLevel($LOGA_LEVEL_DEBUG,1) ;set level using Instance Index
 ;~ _LogaSetInstanceLevel($LOGA_LEVEL_DEBUG,$hLoga1) ;set level using Instance handle
 
-Local $hLoga2 = _LogaNew() ;create new intance with default settings
+Global $hLoga2 = _LogaNew() ;create new intance with default settings
 _LogaSetInstanceLevel($LOGA_LEVEL_WARN, 2)  ;set level using Instance handle
 ;~ _LogaSetInstanceLevel($LOGA_LEVEL_WARN, $hLoga2) ;set level using Instance Index
 

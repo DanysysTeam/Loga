@@ -10,7 +10,7 @@
 ;By default log to STDOUT.
 
 
-Local $hLoga=_LogaNew() ;create instance with default settings
+Global $hLoga=_LogaNew() ;create instance with default settings
 $hLoga.Level=$LOGA_LEVEL_INFO
 $hLoga.LogToFile=False
 _LogaRefreshSettings($hLoga) ;refresh settings
@@ -24,7 +24,7 @@ _LogaFatal("I'm Fatal")
 ConsoleWrite(@CRLF)
 
 ;possible to refresh settings by string
-Local $sSettings='Level="$LOGA_LEVEL_TRACE", LogToFile="true"'
+Global $sSettings='Level="$LOGA_LEVEL_TRACE", LogToFile="true"'
 _LogaRefreshSettings($hLoga,$sSettings) ;refresh settings by string
 _LogaTrace("I'm Trace")
 _LogaDebug("I'm Debug")

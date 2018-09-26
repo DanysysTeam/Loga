@@ -13,9 +13,9 @@
 ;{LongDateTime}
 ;{Message}
 
-Local $sSettings='Format="{LevelName} {LogaName} {DateTime} {Message}", Name="AutoIt Rocks-1"'
+Global $sSettings='Format="{LevelName} {LogaName} {DateTime} {Message}", Name="AutoIt Rocks-1"'
 
-Local $hLoga=_LogaNew($sSettings) ;create instance with custom settings
+Global $hLoga=_LogaNew($sSettings) ;create instance with custom settings
 _LogaTrace("I'm Trace")
 _LogaDebug("I'm Debug")
 _LogaInfo("I'm Info")

@@ -1,9 +1,9 @@
 #include "..\Loga.au3"
 
 
-Local $sSettings='LogToGUI="true"'
+Global $sSettings='LogToGUI="true"'
 
-Local $hLoga=_LogaNew($sSettings) ;create instance with custom settings
+Global $hLoga=_LogaNew($sSettings) ;create instance with custom settings
 _LogaTrace("I'm Trace")
 _LogaDebug("I'm Debug")
 _LogaInfo("I'm Info")

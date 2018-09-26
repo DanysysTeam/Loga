@@ -7,11 +7,11 @@
 If not @Compiled Then Exit MsgBox(0,"Info","Run this example Compiled")
 
 
-Local $sSettings1='LogToGUI="true", GUIBkColor="0x000000", Trans="230", ' & _
+Global $sSettings1='LogToGUI="true", GUIBkColor="0x000000", Trans="230", ' & _
 'InfoFontColor="0xd0ffbc", WarnFontColor="0x53b6ff", ErrorFontColor="0x4a22a8", ' & _
 '_FatalFontColor="0x0000FF", DebugFontColor="0xffab64", TraceFontColor="0xfff0a7"'
 
-Local $hLoga1=_LogaNew($sSettings1) ;create instance with custom settings
+Global $hLoga1=_LogaNew($sSettings1) ;create instance with custom settings
 _LogaTrace("I'm Trace")
 _LogaDebug("I'm Debug")
 _LogaInfo("I'm Info")
@@ -20,12 +20,12 @@ _LogaError("I'm Error")
 _LogaFatal("I'm Fatal")
 
 
-Local $sSettings2='LogToGUI="true", Left="650" , AppendType="$LOGA_APPEND_TOP", ' & _
+Global $sSettings2='LogToGUI="true", Left="650" , AppendType="$LOGA_APPEND_TOP", ' & _
 'InfoFontBkColor="0xd0ffbc", WarnFontBkColor="0x53b6ff", ErrorFontBkColor="0x4a22a8", ' & _
 '_FatalFontBkColor="0x0000FF", DebugFontBkColor="0xffab64" , TraceFontBkColor="0xfff0a7", TraceFontSize="8", FatalFontSize="12"'
 
 
-Local $hLoga2=_LogaNew($sSettings2) ;create instance with custom settings
+Global $hLoga2=_LogaNew($sSettings2) ;create instance with custom settings
 ;by instance index
 _LogaShowGUIOnCompiled(True,$hLoga2)
 _LogaTrace("I'm Trace",2)

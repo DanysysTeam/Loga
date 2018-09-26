@@ -1,8 +1,8 @@
 #include "..\Loga.au3"
 
 
-Local $hLoga1 = _LogaNew()
-Local $hLoga2 = _LogaNew()
+Global $hLoga1 = _LogaNew()
+Global $hLoga2 = _LogaNew()
 
 ;using Instance Index
 _LogaTrace("I'm Trace", 1)

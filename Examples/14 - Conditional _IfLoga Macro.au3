@@ -9,7 +9,7 @@
 ;Custom Console is disabled by default.
 ;By default log to STDOUT.
 
-Local $hLoga=_LogaNew('Level="$LOGA_LEVEL_DEBUG"')
+Global $hLoga=_LogaNew('Level="$LOGA_LEVEL_DEBUG"')
 
 _LogaTrace("I'm Trace")
 _LogaDebug("I'm Debug")

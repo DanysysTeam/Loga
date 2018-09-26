@@ -9,9 +9,9 @@
 ;Custom Console is disabled by default.
 ;By default log to STDOUT.
 
-Local $sSettings='Level="$LOGA_LEVEL_INFO", LogToFile="false"'
+Global $sSettings='Level="$LOGA_LEVEL_INFO", LogToFile="false"'
 
-Local $hLoga=_LogaNew($sSettings) ;create instance with custom settings
+Global $hLoga=_LogaNew($sSettings) ;create instance with custom settings
 _LogaTrace("I'm Trace")
 _LogaDebug("I'm Debug")
 _LogaInfo("I'm Info")
