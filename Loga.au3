@@ -144,32 +144,38 @@ Func _IfLoga($iLevel, $iLogaInstance = 1, Const $iCurrentError = @error, Const $
 EndFunc   ;==>_IfLoga
 
 Func _LogaT($sLogaMessage, $iLogaInstance = 1, Const $iCurrentError = @error, Const $iCurrentExtended = @extended)
+	SetError($iCurrentError, $iCurrentExtended)
 	__LogaWriteMessage($sLogaMessage, $LOGA_TRACE, $iLogaInstance)
 	SetError($iCurrentError, $iCurrentExtended)
 EndFunc   ;==>_LogaT
 
 Func _LogaD($sLogaMessage, $iLogaInstance = 1, Const $iCurrentError = @error, Const $iCurrentExtended = @extended)
+	SetError($iCurrentError, $iCurrentExtended)
 	__LogaWriteMessage($sLogaMessage, $LOGA_DEBUG, $iLogaInstance)
 	SetError($iCurrentError, $iCurrentExtended)
 EndFunc   ;==>_LogaD
 
 
 Func _LogaI($sLogaMessage, $iLogaInstance = 1, Const $iCurrentError = @error, Const $iCurrentExtended = @extended)
+	SetError($iCurrentError, $iCurrentExtended)
 	__LogaWriteMessage($sLogaMessage, $LOGA_INFO, $iLogaInstance)
 	SetError($iCurrentError, $iCurrentExtended)
 EndFunc   ;==>_LogaI
 
 Func _LogaW($sLogaMessage, $iLogaInstance = 1, Const $iCurrentError = @error, Const $iCurrentExtended = @extended)
+	SetError($iCurrentError, $iCurrentExtended)
 	__LogaWriteMessage($sLogaMessage, $LOGA_WARN, $iLogaInstance)
 	SetError($iCurrentError, $iCurrentExtended)
 EndFunc   ;==>_LogaW
 
 Func _LogaE($sLogaMessage, $iLogaInstance = 1, Const $iCurrentError = @error, Const $iCurrentExtended = @extended)
+	SetError($iCurrentError, $iCurrentExtended)
 	__LogaWriteMessage($sLogaMessage, $LOGA_ERROR, $iLogaInstance)
 	SetError($iCurrentError, $iCurrentExtended)
 EndFunc   ;==>_LogaE
 
 Func _LogaF($sLogaMessage, $iLogaInstance = 1, Const $iCurrentError = @error, Const $iCurrentExtended = @extended)
+	SetError($iCurrentError, $iCurrentExtended)
 	__LogaWriteMessage($sLogaMessage, $LOGA_FATAL, $iLogaInstance)
 	SetError($iCurrentError, $iCurrentExtended)
 EndFunc   ;==>_LogaF
@@ -229,31 +235,37 @@ Func __LogaGetInstanceLevel($iLogaInstance = 1)
 EndFunc   ;==>__LogaGetInstanceLevel
 
 Func _LogaTrace($sLogaMessage, $iLogaInstance = 1, Const $iCurrentError = @error, Const $iCurrentExtended = @extended)
+	SetError($iCurrentError, $iCurrentExtended)
 	__LogaWriteMessage($sLogaMessage, $LOGA_TRACE, $iLogaInstance)
 	SetError($iCurrentError, $iCurrentExtended)
 EndFunc   ;==>_LogaTrace
 
 Func _LogaDebug($sLogaMessage, $iLogaInstance = 1, Const $iCurrentError = @error, Const $iCurrentExtended = @extended)
+	SetError($iCurrentError, $iCurrentExtended)
 	__LogaWriteMessage($sLogaMessage, $LOGA_DEBUG, $iLogaInstance)
 	SetError($iCurrentError, $iCurrentExtended)
 EndFunc   ;==>_LogaDebug
 
 Func _LogaInfo($sLogaMessage, $iLogaInstance = 1, Const $iCurrentError = @error, Const $iCurrentExtended = @extended)
+	SetError($iCurrentError, $iCurrentExtended)
 	__LogaWriteMessage($sLogaMessage, $LOGA_INFO, $iLogaInstance)
 	SetError($iCurrentError, $iCurrentExtended)
 EndFunc   ;==>_LogaInfo
 
 Func _LogaWarn($sLogaMessage, $iLogaInstance = 1, Const $iCurrentError = @error, Const $iCurrentExtended = @extended)
+	SetError($iCurrentError, $iCurrentExtended)
 	__LogaWriteMessage($sLogaMessage, $LOGA_WARN, $iLogaInstance)
 	SetError($iCurrentError, $iCurrentExtended)
 EndFunc   ;==>_LogaWarn
 
 Func _LogaError($sLogaMessage, $iLogaInstance = 1, Const $iCurrentError = @error, Const $iCurrentExtended = @extended)
+	SetError($iCurrentError, $iCurrentExtended)
 	__LogaWriteMessage($sLogaMessage, $LOGA_ERROR, $iLogaInstance)
 	SetError($iCurrentError, $iCurrentExtended)
 EndFunc   ;==>_LogaError
 
 Func _LogaFatal($sLogaMessage, $iLogaInstance = 1, Const $iCurrentError = @error, Const $iCurrentExtended = @extended)
+	SetError($iCurrentError, $iCurrentExtended)
 	__LogaWriteMessage($sLogaMessage, $LOGA_FATAL, $iLogaInstance)
 	SetError($iCurrentError, $iCurrentExtended)
 EndFunc   ;==>_LogaFatal
@@ -472,7 +484,7 @@ Func __LogaFreeOnExit()
 	If $__g_hLogaCallback Then DllCallbackFree($__g_hLogaCallback)
 EndFunc   ;==>__LogaFreeOnExit
 
-Func __LogaFormatMessage($aLoga, $iLogaLevelType, $sLogaMessage)
+Func __LogaFormatMessage($aLoga, $iLogaLevelType, $sLogaMessage, Const $iCurrentError = @error, Const $iCurrentExtended = @extended)
 
 	Local $sFormatedMessage = $aLoga[$eLOGA_Format]
 
@@ -505,6 +517,7 @@ Func __LogaFormatMessage($aLoga, $iLogaLevelType, $sLogaMessage)
 		EndSelect
 
 	EndIf
+
 
 	;replace date and time
 	Select
@@ -569,6 +582,16 @@ Func __LogaFormatMessage($aLoga, $iLogaLevelType, $sLogaMessage)
 		$sFormatedMessage = StringReplace($sFormatedMessage, "{LogIndex}", StringFormat("%010s", $aLoga[$eLOGA___LogIndex]))
 	EndIf
 
+	;replace @error
+	If StringInStr($sFormatedMessage, "{error}",2) Then
+		$sFormatedMessage = StringReplace($sFormatedMessage, "{error}", $iCurrentError)
+	EndIf
+
+	;replace @extended
+	If StringInStr($sFormatedMessage, "{extended}",2) Then
+		$sFormatedMessage = StringReplace($sFormatedMessage, "{extended}", $iCurrentExtended)
+	EndIf
+
 	Return $sFormatedMessage & $aLoga[$eLOGA_EndOfLine]
 EndFunc   ;==>__LogaFormatMessage
 
@@ -628,7 +651,7 @@ Func __LogaFontInfo($aLoga, $iLogaLevelType)
 EndFunc   ;==>__LogaFontInfo
 
 
-Func __LogaWriteMessage($sLogaMessage, $iLogaLevelType, $iLogaInstance = 1) ;$LOGA_ALL Log to all Instances
+Func __LogaWriteMessage($sLogaMessage, $iLogaLevelType, $iLogaInstance = 1, Const $iCurrentError = @error, Const $iCurrentExtended = @extended) ;$LOGA_ALL Log to all Instances
 
 	If IsDllStruct($iLogaInstance) Then
 		$iLogaInstance = $iLogaInstance.__InstanceIndex ;intance by handle
@@ -654,7 +677,7 @@ Func __LogaWriteMessage($sLogaMessage, $iLogaLevelType, $iLogaInstance = 1) ;$LO
 			Return SetError(0, 0, 0) ;out of Log level
 		EndIf
 	EndIf
-
+    SetError($iCurrentError,$iCurrentExtended)
 	Local $sFormatedMessage = __LogaFormatMessage($aLoga, $iLogaLevelType, $sLogaMessage)
 	ConsoleWrite($sFormatedMessage) ;write message to console
 	If $aLoga[$eLOGA_LogToStdError] Then ConsoleWriteError($sFormatedMessage) ;write to stderr
