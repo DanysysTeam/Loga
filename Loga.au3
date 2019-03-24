@@ -8,7 +8,7 @@
 #cs Information
 	Author(s)......: Danyfirex & Dany3j
 	Description....: Loga is a simple logging library to keep track of code with an integrated console.
-	Version........: 1.0.0
+	Version........: 1.0.2
 	AutoIt Version.: 3.3.14.5
 #ce Information
 
@@ -61,7 +61,7 @@ Global Const $LOGA_APPEND_TOP = 2 ;just for Logger GUI
 #EndRegion - Public Constants
 
 #Region - Internal Constants
-Global Const $__g_sLogaVersion = "1.0.0"
+Global Const $__g_sLogaVersion = "1.0.2"
 Global Const $__g_LogaSubClassID = 76797165 ;subclass ID
 ;Constants for fast access through array
 Global Enum $eLOGA___InstanceIndex, $eLOGA___LogIndex, $eLOGA_Name, $eLOGA_Level, $eLOGA_LogToFile, $eLOGA_LogFileAutoFlush, $eLOGA_hFile, _

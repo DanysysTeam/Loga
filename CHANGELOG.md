@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## 1.0.2 - 2019-03-24
+### Added
+- Added {error} and {extended} macros support for log format.
+
+
 ## 1.0.1 - 2018-09-28
 ### Added
 - Transparency for @error and @extended.
