@@ -720,8 +720,6 @@ EndFunc   ;==>__LogaWriteMessage
 
 
 Func __LogaGUIAppendText($hWnd, $sText, $iFontName, $iFontSize, $iFontColor, $iFontBkColor, $iFontCharSet, $iAppendType)
-;~ 	_GUICtrlRichEdit_SetFont($hWnd, $iFontSize, $iFontName, $iFontCharSet)
-	ConsoleWrite($iFontName & @CRLF)
 
 	Local $iLength = _GUICtrlRichEdit_GetTextLength($hWnd, True, True)
 	Local $iCp = _GUICtrlRichEdit_GetCharPosOfNextWord($hWnd, $iLength)
