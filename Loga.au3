@@ -892,7 +892,6 @@ Func __LogaRefreshArrayFromStructure($tLoga, ByRef $aLoga)
 		$aLoga[$eLOGA_FatalFontBkColor] = ($tLoga.FatalFontBkColor = -1) ? $aLoga[$eLOGA_GUIBkColor] : Hex($tLoga.FatalFontBkColor)
 		$aLoga[$eLOGA_FatalFontSize] = $tLoga.FatalFontSize
 		$aLoga[$eLOGA_FatalCharSet] = $tLoga.FatalCharSet
-
 	EndIf
 
 EndFunc   ;==>__LogaRefreshArrayFromStructure
