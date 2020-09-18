@@ -25,7 +25,7 @@
 #EndRegion Include
 
 ; #VARIABLES# ===================================================================================================================
-#Region - Internal Varibales
+#Region - Internal Variables
 Global $__g_iLogaInstances = 0 ;number of instances
 Global $__g_atLogaInstances[0] ;array of instances (array if structures)
 Global $__g_aaLogaInstances[0] ;array of Instances (array of arrays)
@@ -33,7 +33,7 @@ Global $__g_hLogaCallback = 0 ;subclass callback handle
 Global $__g_pLogaCallback = 0 ;subclass callback pointer
 Global $__g_bShowAllGUIOnCompiled = False
 Global $__g_iLevel = -1 ;global level override instance levels
-#EndRegion - Internal Varibales
+#EndRegion - Internal Variables
 ; ===============================================================================================================================
 
 ; #CONSTANTS# ===================================================================================================================
