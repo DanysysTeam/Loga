@@ -1,5 +1,5 @@
 #cs Copyright
-	Copyright 2020 Danysys. <hello@danysys.com>
+	Copyright 2021 Danysys. <hello@danysys.com>
 
 	Licensed under the MIT license.
 	See LICENSE file or go to https://opensource.org/licenses/MIT for details.
