@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+
+## 1.0.3 - 2021-07-30
+### Fixed
+- Fix GUI {Message}
+- Fix GUI Interruption
+
+
 ## 1.0.2 - 2019-03-24
 ### Added
 - Added {error} and {extended} macros support for log format.
