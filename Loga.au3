@@ -8,7 +8,7 @@
 #cs Information
 	Author(s)......: Danyfirex & Dany3j
 	Description....: Loga is a simple logging library to keep track of code with an integrated console.
-	Version........: 1.0.2
+	Version........: 1.0.3
 	AutoIt Version.: 3.3.14.5
 #ce Information
 
@@ -583,12 +583,12 @@ Func __LogaFormatMessage($aLoga, $iLogaLevelType, $sLogaMessage, Const $iCurrent
 	EndIf
 
 	;replace @error
-	If StringInStr($sFormatedMessage, "{error}",2) Then
+	If StringInStr($sFormatedMessage, "{error}", 2) Then
 		$sFormatedMessage = StringReplace($sFormatedMessage, "{error}", $iCurrentError)
 	EndIf
 
 	;replace @extended
-	If StringInStr($sFormatedMessage, "{extended}",2) Then
+	If StringInStr($sFormatedMessage, "{extended}", 2) Then
 		$sFormatedMessage = StringReplace($sFormatedMessage, "{extended}", $iCurrentExtended)
 	EndIf
 
@@ -677,7 +677,7 @@ Func __LogaWriteMessage($sLogaMessage, $iLogaLevelType, $iLogaInstance = 1, Cons
 			Return SetError(0, 0, 0) ;out of Log level
 		EndIf
 	EndIf
-    SetError($iCurrentError,$iCurrentExtended)
+	SetError($iCurrentError, $iCurrentExtended)
 	Local $sFormatedMessage = __LogaFormatMessage($aLoga, $iLogaLevelType, $sLogaMessage)
 	ConsoleWrite($sFormatedMessage) ;write message to console
 	If $aLoga[$eLOGA_LogToStdError] Then ConsoleWriteError($sFormatedMessage) ;write to stderr
@@ -695,17 +695,21 @@ Func __LogaWriteMessage($sLogaMessage, $iLogaLevelType, $iLogaInstance = 1, Cons
 		Local $iFontCharSet = $aFontInfo[4]
 
 		If $aLoga[$eLOGA_GUIShowLevelSymbol] Then
-			__LogaGUIAppendText($aLoga[$eLOGA___hRichEdit], $sFormatedMessage, $FontName, $FontSize, _
-					$iFontColor, $iFontBkColor, $iFontCharSet, $aLoga[$eLOGA_AppendType])
+			If BitAND(WinGetState($aLoga[$eLOGA___hRichEdit]), $WIN_STATE_VISIBLE) Then ;GUI log will not be update when is closed(hidden)
+				__LogaGUIAppendText($aLoga[$eLOGA___hRichEdit], $sFormatedMessage, $FontName, $FontSize, _
+						$iFontColor, $iFontBkColor, $iFontCharSet, $aLoga[$eLOGA_AppendType])
+			EndIf
 		Else
 			Local $sSymbol = StringMid($sFormatedMessage, 1) ;get first string character
 			Local $sSymbolToReplace = $aLoga[$eLOGA_DebugSymbol] & "|" & $aLoga[$eLOGA_TraceSymbol] & "|" & _ ;replaceable symbols
 					$aLoga[$eLOGA_WarnSymbol] & "|" & $aLoga[$eLOGA_InfoSymbol] & "|" & $aLoga[$eLOGA_ErrorSymbol] & "|" & $aLoga[$eLOGA_FatalSymbol]
 
-			$sSymbolToReplace = StringRegExpReplace($sSymbolToReplace, '+', '\+') ;cure + symbol
+			$sSymbolToReplace = StringReplace($sSymbolToReplace, '+', '\+') ;cure + symbol
 			If StringRegExp($sSymbol, $sSymbolToReplace) Then $sFormatedMessage = StringMid($sFormatedMessage, 2)
-			__LogaGUIAppendText($aLoga[$eLOGA___hRichEdit], $sFormatedMessage, $FontName, $FontSize, _
-					$iFontColor, $iFontBkColor, $iFontCharSet, $aLoga[$eLOGA_AppendType])
+			If BitAND(WinGetState($aLoga[$eLOGA___hRichEdit]), $WIN_STATE_VISIBLE) Then ;GUI log will not be update when is closed(hidden)
+				__LogaGUIAppendText($aLoga[$eLOGA___hRichEdit], $sFormatedMessage, $FontName, $FontSize, _
+						$iFontColor, $iFontBkColor, $iFontCharSet, $aLoga[$eLOGA_AppendType])
+			EndIf
 		EndIf
 	EndIf
 
